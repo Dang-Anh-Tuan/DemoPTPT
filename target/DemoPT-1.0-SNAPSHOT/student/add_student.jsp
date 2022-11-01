@@ -27,5 +27,7 @@
             </select>
             <input type="submit" value="Submit">
         </form>
+        <a href="/DemoPT/student">Back</a>
+
     </body>
 </html>

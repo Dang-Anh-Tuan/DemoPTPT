@@ -18,7 +18,7 @@ public interface IStudentService {
     
     void create(String name, int age, int idLocation);
     
-    void update(String name, int age);
+    void update(int id, String name, int age, int idLocation);
     
     void delete(int id);
 }

@@ -13,14 +13,14 @@ import java.util.List;
  *
  * @author Admin
  */
-public class StudentService implements IStudentService{
+public class StudentService implements IStudentService {
 
     private StudentDAO dao;
 
     public StudentService() {
         this.dao = new StudentDAO();
     }
-    
+
     @Override
     public List<Student> getAll() {
         return this.dao.getAll();
@@ -28,7 +28,7 @@ public class StudentService implements IStudentService{
 
     @Override
     public Student getById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.dao.getById(id);
     }
 
     @Override
@@ -36,17 +36,14 @@ public class StudentService implements IStudentService{
         this.dao.create(name, age, idLocation);
     }
 
-   
-
     @Override
     public void delete(int id) {
         this.dao.delete(id);
     }
 
     @Override
-    public void update(String name, int age) {
-        this.dao.update(name, age);
+    public void update(int id, String name, int age, int idLocation) {
+        this.dao.update(id, name, age, idLocation);
     }
 
-   
 }

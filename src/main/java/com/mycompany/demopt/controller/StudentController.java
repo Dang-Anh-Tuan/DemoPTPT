@@ -34,7 +34,7 @@ public class StudentController extends HttpServlet {
         List<Student> students = this.studentService.getAll();
 
         req.setAttribute("students", students);
-        String url = "list_student.jsp";
+        String url = "student/list_student.jsp";
         RequestDispatcher dispatcher = req.getRequestDispatcher(url);
         dispatcher.forward(req, resp);
     }

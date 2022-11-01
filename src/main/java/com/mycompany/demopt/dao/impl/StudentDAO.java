@@ -59,7 +59,38 @@ public class StudentDAO implements IStudentDAO {
 
     @Override
     public Student getById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            System.out.println(id);
+            String sql = "SELECT * FROM \n"
+                    + "   tbl_student, tbl_location \n"
+                    + "   WHERE tbl_student.id = ?";
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+
+            Student student = new Student();
+
+            while (result.next()) {
+                int idStudent = Integer.parseInt(result.getString(1));
+                String name = result.getString(2);
+                int age = Integer.parseInt(result.getString(3));
+                int idLocation = Integer.parseInt(result.getString(4));
+                String nameLocation = result.getString(6);
+
+                student.setId(idStudent);
+                student.setName(name);
+                student.setAge(age);
+                Location location = new Location(idLocation, nameLocation);
+                student.setLocation(location);
+            }
+
+            return student;
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return null;
     }
 
     @Override
@@ -81,15 +112,22 @@ public class StudentDAO implements IStudentDAO {
     }
 
     @Override
-    public void update(String name, int age) {
-        String sql = "UPDATE FROM tbl_student WHERE id = ?";
+    public void update(int id, String name, int age, int idLocation) {
+        try {
+            String sql = "UPDATE tbl_student SET name = ? , age = ?, idLocation = ? WHERE id = ?";
 
-        PreparedStatement statement = this.connection.prepareStatement(sql);
-        statement.setInt(1, id);
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            statement.setString(1, name);
+            statement.setInt(2, age);
+            statement.setInt(3, idLocation);
+            statement.setInt(4, id);
 
-        int rowsDeleted = statement.executeUpdate();
-        if (rowsDeleted > 0) {
-            System.out.println("Delete success");
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Delete success");
+            }
+
+        } catch (Exception e) {
         }
     }
 
